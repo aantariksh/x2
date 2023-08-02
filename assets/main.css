@@ -1,0 +1,16 @@
+body {
+    background-image: url("./img/registration.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+}
+
+.btn-image {
+    width: 50vw;
+    height: auto;
+    background-image: url("./img/submit.png");
+    /* background-size: cover; */
+    background-size: 100% 100%;
+}
+  

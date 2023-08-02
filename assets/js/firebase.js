@@ -2,6 +2,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-app.js";
 import { getDatabase, set, ref, get, query, orderByChild, onValue, endAt, limitToFirst } from "https://www.gstatic.com/firebasejs/9.16.0/firebase-database.js";
 
+import pincodes from '../pincodes.json' assert {type: 'json'};
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDlaXoh9qDEob3zJZ7HztV5lTShDvILVEI",
@@ -124,3 +126,10 @@ function getEntireLeaderBoard() {
     })
   })
 }
+
+const exports = {
+  pincodes,
+  addScore,
+  addProfile
+}
+Object.keys(exports).forEach(key => window[key] = exports[key])

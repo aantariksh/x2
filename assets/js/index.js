@@ -1,5 +1,3 @@
-const pincodes = require("../pincodes.json");
-
 // Check Login Status 
 window.addEventListener('load', async () => {
   const currentPage = location.pathname;
@@ -44,32 +42,29 @@ function generateShortUniqueCode() {
 }
 
 const registration = document.getElementById("registration")
-if (registration) {
-  registration.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const values = Object.fromEntries(formData.entries());
-    const { name, mobile, pincode } = values
-    if (!isValidMobileNumber(mobile)) {
-      alert("Please enter a valid mobile number"); return
-    }
-    const city = pincodes[pincode];
-    if (!city) {
-      alert("Please enter a valid pincode"); return
-    }
+async function register() {
+  const formData = new FormData(registration);
+  const values = Object.fromEntries(formData.entries());
+  const { name, mobile, pincode } = values
+  if (!isValidMobileNumber(mobile)) {
+    alert("Please enter a valid mobile number"); return
+  }
+  const city = pincodes[pincode];
+  if (!city) {
+    alert("Please enter a valid pincode"); return
+  }
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const referredBy = urlParams.get('code') || '';
+  const urlParams = new URLSearchParams(window.location.search);
+  const referredBy = urlParams.get('code') || '';
 
-    const referralCode = generateShortUniqueCode()
-    const userType = "User"
+  const referralCode = generateShortUniqueCode()
+  const userType = "User"
 
-    const profile = {
-      name, mobile, pincode, city, referredBy, referralCode, userType
-    }
+  const profile = {
+    name, mobile, pincode, city, referredBy, referralCode, userType
+  }
 
-    localStorage.setItem("profile", JSON.stringify(profile));
-    await addProfile(profile)
-    location.href = "index.html"
-  })
+  localStorage.setItem("profile", JSON.stringify(profile));
+  await addProfile(profile)
+  location.href = "index.html"
 }
