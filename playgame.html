@@ -15,14 +15,15 @@
           <form onsubmit="submitForm(event);">
             <div class="mb-3">
               <label for="score" class="form-label">Score</label>
-              <input type="number" class="form-control" id="score" name="score">
+              <input type="number" class="form-control" id="score" name="score" required>
             </div>
             <div class="mb-3">
               <label for="time" class="form-label">Time</label>
-              <input type="number" class="form-control" id="time" name="time">
+              <input type="number" class="form-control" id="time" name="time" required>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>          
+          <a href="game.html" class="btn btn-warning mt-5">Back</a>
         </div>
       </div>
     </div>
@@ -36,7 +37,8 @@
       e.preventDefault();
       const formData = new FormData(e.target)
       const values = Object.fromEntries(formData.entries());
-      addScore(values)
+      addScore(parseInt(values?.score || 0), parseInt(values?.time || 0))
+      e.target.reset();
     }
   </script>
 </html>
