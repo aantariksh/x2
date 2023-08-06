@@ -1,0 +1,16 @@
+{
+"companyName": "MWS",
+"productName": "Capstan Bike Game",
+"productVersion": "1.0.5",
+"dataUrl": "DreamRide_mobile_v1.data.unityweb",
+"wasmCodeUrl": "DreamRide_mobile_v1.wasm.code.unityweb",
+"wasmFrameworkUrl": "DreamRide_mobile_v1.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.4.34f1"
+}

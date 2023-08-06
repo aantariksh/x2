@@ -88,11 +88,25 @@ function generateShortUniqueCode() {
   return code;
 }
 
+function isDateAtLeast18YearsBack(givenDate) {
+  const currentDate = new Date();
+  const eighteenYearsAgo = new Date();
+  eighteenYearsAgo.setFullYear(currentDate.getFullYear() - 18);
+
+  const parsedDate = new Date(givenDate);
+  return parsedDate <= eighteenYearsAgo;
+}
+
 const registration = document.getElementById("registration")
 async function register() {
   const formData = new FormData(registration);
   const values = Object.fromEntries(formData.entries());
-  const { name, mobile, pincode } = values
+  const { name, mobile, dob, pincode } = values
+
+  if (!isDateAtLeast18YearsBack(dob)) {
+    alert("Must be 18+ to participate. Sorry!"); return
+  }
+
   if (!isValidMobileNumber(mobile)) {
     alert("Please enter a valid mobile number"); return
   }

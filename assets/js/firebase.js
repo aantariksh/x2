@@ -17,7 +17,19 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
 const GAME_ID = "bikeRace"
+const START_DATE = new Date("2023-08-06");
 
+function computeCurrentWeek() {
+  try {
+    const currentDate = new Date();
+    const oneDay = 24 * 60 * 60 * 1000;
+    const diffDays = Math.round(Math.abs((START_DATE - currentDate) / oneDay));
+    // Calculate the current week
+    return Math.floor(diffDays / 7) + 1;
+  } catch {
+    return 1
+  }
+}
 
 /**
  * FIREBASE CRUD functions
@@ -67,7 +79,6 @@ async function addScore(score, time) {
   finalScore.total = finalScore.score + finalScore.bonus
   finalScore.negative_total = -finalScore.total
 
-  console.log(finalScore)
   await set(dbRef, finalScore);
 }
 
@@ -122,8 +133,8 @@ async function getScoreWithRank() {
 }
 
 // LeaderBoard
-async function getEntireLeaderBoard() {
-  const scoreBoardQuery = query(ref(db, `${GAME_ID}/scores/`), orderByChild('negative_total'), limitToFirst(100));
+async function getEntireLeaderBoard(count=100) {
+  const scoreBoardQuery = query(ref(db, `${GAME_ID}/scores/`), orderByChild('negative_total'), limitToFirst(count));
   const snapshot = await get(scoreBoardQuery);
   const data = []
 
@@ -139,10 +150,45 @@ async function getEntireLeaderBoard() {
   return leaderBoard
 }
 
+// Weekly Winners/weekId: [mobile, mobile2, ..., mobile100]
+async function getWeeklyWinners(week) {
+  const dbRef = ref(db, `${GAME_ID}/winners/${week}`)
+  const snapshot = await get(dbRef);
+  return snapshot.val()
+}
+
+async function getWeeklyWinnersWithDetails(week) {
+  const winningMobileNumbers = await getWeeklyWinners(week)
+  const promises = winningMobileNumbers.map(async mobile => {
+    const user = await getProfile(mobile)
+    const scores = await getScore(mobile)
+    return {mobile, user, scores}
+  })
+  const data = await Promise.all(promises)
+  return data
+}
+
+async function computeWinners(count) {
+  const week = computeCurrentWeek() - 1
+  if (![1,2,3,4,5,6].includes(week)) return
+
+  const scoreBoardQuery = query(ref(db, `${GAME_ID}/scores/`), orderByChild('negative_total'), limitToFirst(count * week));
+  const snapshot = await get(scoreBoardQuery);
+  const data = []
+  snapshot.forEach(child => data.push(child.key))
+
+  let prevWinners = []
+  for (let i = 0; i < week; i++) {
+    prevWinners.push(getWeeklyWinners(i))
+  }
+}
+
 const exports = {
+  START_DATE, computeCurrentWeek,
   addProfile, getProfile,
   addScore, addBonus,
   getScore, getPlayerRank, getScoreWithRank,
-  getEntireLeaderBoard
+  getEntireLeaderBoard,
+  getWeeklyWinnersWithDetails, computeWinners
 }
 Object.keys(exports).forEach(key => window[key] = exports[key])

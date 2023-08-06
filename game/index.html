@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Player | Capstan Bike Game</title>
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <script src="TemplateData/UnityProgress.js"></script>
+    <script src="Build/UnityLoader.js"></script>
+    <script>
+      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/DreamRide_mobile_v1.json", {onProgress: UnityProgress});
+    </script>
+  </head>
+  <body>
+      <div class="webgl-content">
+        <div id="unityContainer"></div>
+      </div>
+  </body>
+
+  <script>
+    const GAME_WIDTH = 825, GAME_HEIGHT = 1600;
+
+    window.onload = () => {
+      const unityContainer = document.getElementById('unityContainer');
+      const screenWidth = window.innerWidth;
+      const screenHeight = window.innerHeight;
+
+      // Check if the screen width is less than or equal to the mobile breakpoint (e.g., 768px)
+      if (screenWidth <= 450) {
+        unityContainer.style.width = `${screenWidth}px`;
+        const adjustedHeight = (GAME_HEIGHT/GAME_WIDTH) * screenWidth;
+        unityContainer.style.height = `${adjustedHeight}px`;
+      } else {
+        unityContainer.style.height = `${screenHeight}px`;
+        const adjustedWidth = (GAME_WIDTH / GAME_HEIGHT) * screenHeight;
+        unityContainer.style.width = `${adjustedWidth}px`;
+      }
+    }
+  </script>
+</html>
