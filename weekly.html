@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Race2Vegas</title>
+    <!-- Favicons -->
+    <link href="./assets/img/favicon.png" rel="icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="./assets/main.css" rel="stylesheet">
     <style>
@@ -48,7 +50,7 @@
         const imgsrc = currentWeek >= i ? `./assets/img/Weekly/w${i}.png` : `./assets/img/Weekly/w${i}b.png`
         const col = `<div class="col-4 mb-2">
           <a ${href}>
-            <img src="${imgsrc}" style="width: 100%;">
+            <img src="${imgsrc}" style="width: 90%;">
           </a>
         </div>`
         if (weeks) weeks.innerHTML += col

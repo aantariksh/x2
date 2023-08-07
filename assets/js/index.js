@@ -55,12 +55,12 @@ window.addEventListener('load', async () => {
 
 function getLoggedInUser() {
   const profile = JSON.parse(localStorage.getItem("profile"))
-  if (!profile) location.reload()
+  if (!profile) location.href = "auth.html"
   return profile.mobile
 }
 
 // Logout user
-function logOut() { localStorage.removeItem("profile"); location.reload(); }
+function logOut() { localStorage.removeItem("profile"); location.href = "auth.html"; }
 
 /**
  * Registration process

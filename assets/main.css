@@ -36,4 +36,21 @@ body {
     /* background-size: cover; */
     background-size: 100% 100%;
 }
-  
+
+/* Custom CSS for the zoom-in and zoom-out effect */
+.zoom-effect {
+  animation: zoomInOut 0.6s infinite alternate; /* Use alternate to create continuous back and forth animation */
+  transform-origin: center center; /* Set the transform origin to the center for smooth zoom */
+}
+
+@keyframes zoomInOut {
+  0% { transform: scale(1); } /* Initial size, no zoom */
+  100% { transform: scale(1.08); } /* Zoom to 120% of the original size */
+}
+
+.card, .card-body { 
+  background-color: rgba(255, 255, 255, 0.3); 
+  border: 2px solid;
+  border-image: linear-gradient(to bottom right, #FC0008, #0566E6);
+  border-image-slice: 1;
+}
