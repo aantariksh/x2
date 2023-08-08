@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="./assets/main.css" rel="stylesheet">
     <style>
-      .background-container { background-image: url("./assets/img/bg_logo.png"); }
+      .background-container { background-image: url("./assets/img/bg_logo.jpg"); }
       .table-custom { --bs-table-bg: rgba(255, 255, 255, 0.6); }
       .card, .card-body { background-color: rgba(255, 255, 255, 0) }
       .card-body { max-height: 60vh; overflow-y: auto; }
@@ -34,13 +34,19 @@
         left: 0;
         width: 100%;
         height: 10px; /* Set the height of the pseudo-element to allow scrolling */
-      }      
+      }
+      #rank-pill {
+        background-image: linear-gradient(to right, #7c0000, #d60001, #7c0000); 
+        border: 3px solid #3e8de2;
+      }   
+      small { font-size: 0.85em;}
+      span { font-family: Times; font-weight: bold; }
     </style>
   </head>
   <body>
 
     <div class="background-container align-items-end" id="backgroundContainer">
-      <div class="container content-container" id="contentContainer">
+      <div class="container content-container align-items-end" id="contentContainer">
         <img src="./assets/img/LeaderBoard/leaderboard.png" style="width: 100%;">
         <div class="mx-3">
           <div class="card mb-3 border-none">
@@ -63,8 +69,13 @@
               </table>                 
             </div>  
           </div>  
+          <div class="d-grid mb-3">
+            <button class="btn btn-danger rounded-pill" id="rank-pill">
+              Your Rank 0 <span> | </span> Score 0
+            </button>
+          </div>
         </div>
-        <div class="row mb-5">
+        <div class="row mb-2">
           <div class="col-12 d-flex justify-content-around">
             <a href="index.html"><img src="./assets/img/home.png" style="height: 4vh;"></a>
             <a href="weekly.html"><img src="./assets/img/weekly.png" style="height: 4vh;"></a>
@@ -91,7 +102,7 @@
         <th scope="row">{}</th>
         <td>{} <br><small>{}</small></td>
         <td>{}</td>
-        <td>{} <br><small>+{}</small></td>
+        <td class="text-center">{} <br><small>{}</small></td>
         <td>{}</td>
       </tr>
     `
@@ -100,14 +111,16 @@
       const data = await getEntireLeaderBoard();
       leaderBoardTable.innerHTML = ''
       data.forEach((d, i) => {
-        const row = schema.format(i+1, 
-          d.user.name, d.user.mobile, d.user.city, 
-          d.scores.total, d.scores.bonus, `${d.scores.time} secs`
-        )
-        leaderBoardTable.innerHTML += row
+        try {
+          const row = schema.format(i+1, 
+            d.user.name, `XXXXXX${d.user.mobile.slice(-4)}`, d.user.city, 
+            d.scores.total, `<span>+</span>${d.scores.bonus}`, `${d.scores.time} <br><small>secs</small>`
+          )
+          leaderBoardTable.innerHTML += row
+        } catch {}
       })
 
-      const MIN_ROWS = 7
+      const MIN_ROWS = 9
       if (data.length < MIN_ROWS) {
         const pending = MIN_ROWS - data.length
         const row = schema.format('','','','','','','')
@@ -115,6 +128,10 @@
           leaderBoardTable.innerHTML += row
         }
       }
+
+      const scoreRank =  await getScoreWithRank()
+      const rankPill = document.getElementById("rank-pill")
+      rankPill.innerHTML = `Your Rank ${scoreRank.rank} <span> | </span> Score ${scoreRank.score.total}`
     };
   </script>  
 </html>

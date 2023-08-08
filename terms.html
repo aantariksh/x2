@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Race2Vegas</title>
+    <!-- Favicons -->
+    <link href="./assets/img/favicon.png" rel="icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./assets/main.css" rel="stylesheet">
+    <style>
+      .background-container { background-image: url("./assets/img/bg_logo.jpg"); }
+      .card, .card-body { background-color: rgba(255, 255, 255, 0.4) }
+      .card-body { max-height: 65vh; overflow-y: auto; font-size: 14px; }
+      .sticky-header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background-image: linear-gradient(to bottom right, rgba(252, 0, 8, 0.9), rgba(5, 102, 230, 0.9));
+      }
+      .card-body::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 10px; /* Set the height of the pseudo-element to allow scrolling */
+      }
+      .card-body::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 10px; /* Set the height of the pseudo-element to allow scrolling */
+      }      
+    </style>
+  </head>
+  <body>
+
+    <div class="background-container align-items-end" id="backgroundContainer">
+      <div class="container content-container" id="contentContainer">
+        <h2 class="text-white text-center">Terms & Conditions</h2>
+        <div class="mx-3">
+          <div class="card mb-3 border-none">
+            <div class="card-body">
+              1. THIS ACTIVITY IS OPEN TO PERSONS OF AGE 18 YEARS AND ABOVE, AS ON 21st
+              AUGUST, 2023. PARTICIPATION IN THIS ACTIVITY IS PURELY VOLUNTARY AND
+              IMPLIES ACCEPTANCE OF THESE TERMS AND CONDITIONS. <br><br>
+              2. THIS ACTIVITY IS ONLY OPEN IN THE STATES OF TELANGANA, ANDHRA PRADESH,
+              MADHYA PRADESH, MAHARASHTRA AND GUJARAT <br><br>
+              3. ANY MISSED CALL OR PARTICIPATION RECEIVED FROM STATES OTHER THAN THOSE
+              SPECIFIED ABOVE WILL NOT BE CONSIDERED. PARTICIPATION IN THIS ACTIVITY WILL
+              BE TREATED AS VOID WHEREVER SUCH ACTIVITIES ARE PROHIBITED UNDER LOCAL
+              LAWS. <br><br>
+              4. THIS PACK IS ALSO AVAILABLE WITHOUT THIS ACTIVITY. <br><br>
+              5. THIS ACTIVITY WILL START ON 21st AUGUST, 2023 AND WILL END ON 14th OCTOBER,
+              2023. NO ENTRY WILL BE ENTERTAINED AFTER 14th OCTOBER, 2023. <br><br>
+              6. THE ELIGIBLE PARTICIPANTS WHO INTEND TO PARTICIPATE IN THIS ACTIVITY WILL
+              HAVE TO REGISTER ON WWW.RACE2VEGAS.IN. ALL VALID ENTRIES WILL WIN A
+              STYLISH MOBILE PHONE WALLPAPER. <br><br>
+              7. PARTICIPANTS CAN PLAY A BIKE RACING GAME AND STAND A CHANCE TO WIN
+              Weekly Prizes. <br><br>
+              8. ONE WINNING ENTRY STANDS A CHANCE TO WIN A VOUCHER FOR A TRIP TO LAS
+              VEGAS FOR 2 PEOPLE FOR 7 DAYS. THE WINNER WILL BE SELECTED FROM THE VALID
+              AND ELIGIBLE ENTRIES AND WILL BE INFORMED THROUGH SMS BY 31st NOVEMBER,
+              2023. <br><br>
+              9. THE PARTICIPANT MUST NOT SUBMIT UNLAWFUL, OFFENSIVE, INACCURATE,
+              MISLEADING, ABUSIVE, PORNOGRAPHIC, HARASSING, LIBELLOUS, BLASPHEMOUS,
+              DEFAMATORY, OBSCENE, HATEFUL, RACIALLY OR ETHICALLY OBJECTIONABLE,
+              DISPARAGING, OR OTHERWISE INAPPROPRIATE MATERIAL AND AGREES TO OBTAIN
+              ANY CONSENTS, PERMISSION OR LICENSES THAT MAY BE LEGALLY REQUIRED TO
+              SUBMIT ANY MATERIAL OR CONTENT AND RESPECT THE PRIVACY OF OTHERS. <br><br>
+              10. ANY PARTICIPANT WHO RECEIVES A CASHBACK OR THE WEEKLY PRIZE ONCE, WILL
+              NOT BE ELIGIBLE FOR THESE GRATIFICATIONS AGAIN THROUGHOUT THE ACTIVITY.
+              HOWEVER, THEY ARE ELIGIBLE FOR THE GRAND PRIZE I.E. TRIP TO LAS VEGAS FOR 2. <br><br>
+              11. PRIZE SHALL BE GIVEN SUBJECT TO WINNER SHOWING A VALID PROOF OF IDENTITY,
+              ADDRESS AND AGE. NO ADDITIONAL CLAIM WILL BE ENTERTAINED. <br><br>
+              12. THERE IS NO WARRANTY OR ASSURANCE AS TO THE QUALITY OF PRIZE. THE ACTUAL
+              PRIZE WON MAY DIFFER IN SIZE, SHAPE OR COLOUR AS COMPARED TO THE ONES
+              DEPICTED IN COMMUNICATIONS. <br><br>
+              13. PRIZE WON IS NON-TRANSFERABLE AND CANNOT BE EXCHANGED OR REDEEMED
+              FOR CASH. <br><br>
+              14. ITC LIMITED (ITC) RESERVES THE RIGHT TO REJECT THE CLAIM IF ANY OF THE TERMS
+              OR CONDITIONS ARE NOT MET. ITC WILL NOT BE LIABLE IN ANY MANNER FOR ANY
+              CLAIM ARISING OUT OF OR IN RESPECT OF THIS ACTIVITY. <br><br>
+              15. ITC RESERVES THE RIGHT TO CHANGE THE TERMS AND CONDITIONS OF THIS
+              ACTIVITY INCLUDING EXTENDING, WITHDRAWING, OR DISCONTINUING THE SAME
+              WITHOUT NOTICE OR ASSIGNING ANY REASON, AT ITS SOLE DISCRETION AND
+              WITHOUT ANY LIABILITY. <br><br>
+              16. ITC IS ONLY RESPONSIBLE FOR PROVIDING THE TRIP VOUCHER TO THE WINNER. IT
+              WILL NOT BEAR ANY RESPONSIBILITY OF ANY MISHAPS THAT HAPPENS DURING THE
+              TRIP. <br><br>
+              17. EMPLOYEES OF ITC AND THEIR FAMILY MEMBERS ARE NOT ENTITLED TO
+              PARTICIPATE IN THIS ACTIVITY. <br><br>
+              18. ALL DISPUTES ARE SUBJECT TO THE EXCLUSIVE JURISDICTION OF THE COURTS OF
+              KOLKATA. <br><br>
+            </div>  
+          </div>  
+        </div>
+        <div class="row mb-5">
+          <div class="col-12 d-flex justify-content-around">
+            <a href="index.html"><img src="./assets/img/home.png" style="height: 5vh;"></a>
+          </div>       
+        </div>
+      </div>
+    </div>
+
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/js/firebase.js" type="module"></script>
+  <script src="./assets/js/index.js"></script>
+</html>

@@ -7,10 +7,9 @@
     <!-- Favicons -->
     <link href="./assets/img/favicon.png" rel="icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
     <link href="./assets/main.css" rel="stylesheet">
     <style>
-      .background-container { background-image: url("./assets/img/bg_logo.png"); }
+      .background-container { background-image: url("./assets/img/bg_logo.jpg"); }
       #registration {
         font-family: 'Jersey M54', sans-serif;
         font-size: 17px;
@@ -20,8 +19,8 @@
   </head>
   <body>
 
-    <div class="background-container align-items-center" id="backgroundContainer">
-      <div class="container content-container" id="contentContainer">
+    <div class="background-container align-items-end" id="backgroundContainer">
+      <div class="container content-container align-items-center" id="contentContainer" style="height: 80vh;">
 
         <div class="text-center d-none">
           <img src="./assets/img/registration.png" style="width: 80%;">
@@ -40,7 +39,63 @@
               </div>
               <div class="mb-3">
                 <label for="dob" class="form-label">DATE OF BIRTH</label>
-                <input type="text" class="form-control" id="dob" name="dob" readonly required style="font-family: Arial, Helvetica, sans-serif;font-weight: bold;">
+                <div class="row g-0">
+                  <div class="col-4">
+                    <select class="form-control" name="date" required>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                      <option value="31">31</option>
+                    </select>
+                  </div>
+                  <div class="col-4">
+                    <select class="form-control" name="month" required>
+                      <option value="1">January</option>
+                      <option value="2">February</option>
+                      <option value="3">March</option>
+                      <option value="4">April</option>
+                      <option value="5">May</option>
+                      <option value="6">June</option>
+                      <option value="7">July</option>
+                      <option value="8">August</option>
+                      <option value="9">September</option>
+                      <option value="10">October</option>
+                      <option value="11">November</option>
+                      <option value="12">December</option>
+                    </select>
+                  </div>
+                  <div class="col-4">
+                    <select class="form-control" id="yearDropdown" name="year" required></select>
+                  </div>
+                </div>
+
               </div>
               <div class="mb-3">
                 <label for="pincode" class="form-label">PINCODE</label>
@@ -66,13 +121,16 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Bootstrap Datepicker JavaScript -->
   <script src="./assets/vendors/jquery.min.js"></script>
-  <script src="./assets/vendors/datepicker.min.js"></script>
   <script>
-    $(document).ready(function() {
-      $('#dob').datepicker({
-        format: 'yyyy-mm-dd'
-      });
-    });
+    const yearDropdown = document.getElementById("yearDropdown");
+    const currentYear = new Date().getFullYear();
+
+    for (let year = currentYear; year >= 1940; year--) {
+      const option = document.createElement("option");
+      option.value = year;
+      option.text = year;
+      yearDropdown.appendChild(option);
+    }
   </script>
   
   <script src="./assets/js/firebase.js" type="module"></script>

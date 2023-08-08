@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CarePal Admin</title>
+    <link href="../assets/img/favicon.png" rel="icon">
+    <!-- Vendor CSS Files -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./style.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    
+    <main class="form-signin w-100 m-auto">
+      <form id="login-form">
+        <img class="mb-4" src="../assets/img/logo.png" height="40">
+        <h1 class="h3 mb-3 fw-normal">Admin SignIn</h1>
+    
+        <div class="form-floating">
+          <input type="email" class="form-control" name="email" required id="floatingInput" placeholder="name@example.com">
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="floatingPassword" name="password" required placeholder="Password">
+          <label for="floatingPassword">Password</label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+
+        <br><br><br>
+        <a class="w-100 btn btn-lg btn-warning" href="../index.html">Back Home</a>
+      </form>
+    </main>
+
+  </body>
+  <!-- Vendor JS Files -->
+  <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="./vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="./firebase/index.js" type="module"></script>
+</html>

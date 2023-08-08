@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="./assets/main.css" rel="stylesheet">
     <style>
-      .background-container { background-image: url("./assets/img/Weekly/bg.png"); }
+      .background-container { background-image: url("./assets/img/Weekly/bg.jpg"); }
     </style>
   </head>
   <body>
@@ -46,8 +46,8 @@
       const currentWeek = computeCurrentWeek()
       const weeks = document.getElementById("weeks")
       for (i = 1; i <= 6; i++) {
-        const href = currentWeek >= i ? `href="winners.html?week=${i}"` : ""
-        const imgsrc = currentWeek >= i ? `./assets/img/Weekly/w${i}.png` : `./assets/img/Weekly/w${i}b.png`
+        const href = currentWeek > i ? `href="winners.html?week=${i}"` : ""
+        const imgsrc = currentWeek > i ? `./assets/img/Weekly/w${i}.png` : `./assets/img/Weekly/w${i}b.png`
         const col = `<div class="col-4 mb-2">
           <a ${href}>
             <img src="${imgsrc}" style="width: 90%;">

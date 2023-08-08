@@ -17,7 +17,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
 const GAME_ID = "bikeRace"
-const START_DATE = new Date("2023-08-06");
+const START_DATE = new Date("2023-08-15");
 
 function computeCurrentWeek() {
   try {
@@ -57,8 +57,19 @@ async function getProfile(mobile) {
   return snapshot.val()
 }
 
+async function check(k) {
+  const secRef = ref(db, `secret`)
+  const secret = await get(secRef);
+  return secret.val() == k
+}
+
 // SCORES/mobile: { score, bonus, total, time, gameCount }
-async function addScore(score, time) {
+async function addScore(k, s, t) {
+  const isValid = await check(k);
+  if (!isValid) return
+  const score = parseInt(s);
+  const time = parseFloat(t).toFixed(2);
+  
   const mobile = getLoggedInUser()
   const dbRef = ref(db, `${GAME_ID}/scores/${mobile}`);
   const snapshot = await get(dbRef);
@@ -82,10 +93,27 @@ async function addScore(score, time) {
   await set(dbRef, finalScore);
 }
 
-async function addBonus(bonus) {
-  const mobile = getLoggedInUser()
-  const dbRef = ref(db, `${GAME_ID}/scores/${mobile}`);
-  const oldScore = await get(dbRef);
+async function addBonus(referredBy) {
+  const bonus = 50
+  // Reference to the Firebase database
+  let dbRef =  ref(db, `${GAME_ID}/users`);
+  
+  // Query the database to find the user with the referral code
+  let snapshot = await get(dbRef);
+  const data = snapshot.val()
+  let mobile = ''
+  for (let id in data) {
+    const userData = data[id]
+    if (userData.referralCode === referredBy) {
+      mobile = id; break
+    }
+  }
+  if (!mobile) return
+
+  // Update Score
+  dbRef = ref(db, `${GAME_ID}/scores/${mobile}`);
+  snapshot = await get(dbRef);
+  const oldScore = snapshot.val()
 
   let finalScore = {
     score: oldScore?.score || 0,
@@ -96,7 +124,7 @@ async function addBonus(bonus) {
   }
   finalScore.bonus += bonus;
   finalScore.total = finalScore.score + finalScore.bonus
-  finalScore.negative_total = -total
+  finalScore.negative_total = -finalScore.total
 
   await set(dbRef, finalScore);
 }
@@ -184,10 +212,10 @@ async function computeWinners(count) {
 }
 
 const exports = {
-  START_DATE, computeCurrentWeek,
+  computeCurrentWeek,
   addProfile, getProfile,
   addScore, addBonus,
-  getScore, getPlayerRank, getScoreWithRank,
+  getScoreWithRank,
   getEntireLeaderBoard,
   getWeeklyWinnersWithDetails, computeWinners
 }

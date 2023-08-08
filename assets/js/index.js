@@ -9,6 +9,10 @@ function getAdjustedBackgroundImageWidth() {
 }
 
 function adjustLayout() {
+  const currentPage = location.pathname;
+  const isGamePage = currentPage.includes('game')
+  if (isGamePage) return
+
   const backgroundContainer = document.getElementById('backgroundContainer');
   const contentContainer = document.getElementById('contentContainer');
   const screenWidth = window.innerWidth;
@@ -50,7 +54,10 @@ window.addEventListener('load', async () => {
   const currentPage = location.pathname;
   const isAuthPage = currentPage.includes('auth')
   const profile = localStorage.getItem("profile");
-  if (!profile && !isAuthPage) { location.href = "auth.html" }
+  if (!profile && !isAuthPage) { 
+    const loc = currentPage.includes('game') ? "../auth.html" : "auth.html"
+    location.href = loc
+  }
 })
 
 function getLoggedInUser() {
@@ -88,12 +95,20 @@ function generateShortUniqueCode() {
   return code;
 }
 
-function isDateAtLeast18YearsBack(givenDate) {
+// Remember that the month is 0-based so February is actually 1...
+function isValidDate(year, month, day) {
+  var d = new Date(year, month, day);
+  if (d.getFullYear() == year && d.getMonth() == month && d.getDate() == day) {
+      return true;
+  }
+  return false;
+}
+
+function isDateAtLeast18YearsBack(parsedDate) {
   const currentDate = new Date();
   const eighteenYearsAgo = new Date();
   eighteenYearsAgo.setFullYear(currentDate.getFullYear() - 18);
 
-  const parsedDate = new Date(givenDate);
   return parsedDate <= eighteenYearsAgo;
 }
 
@@ -101,22 +116,30 @@ const registration = document.getElementById("registration")
 async function register() {
   const formData = new FormData(registration);
   const values = Object.fromEntries(formData.entries());
-  const { name, mobile, dob, pincode } = values
-
-  if (!isDateAtLeast18YearsBack(dob)) {
-    alert("Must be 18+ to participate. Sorry!"); return
-  }
+  const { name, mobile, date, month, year, pincode } = values
 
   if (!isValidMobileNumber(mobile)) {
     alert("Please enter a valid mobile number"); return
   }
+
+  if (!isValidDate(year, month-1, date)) {
+    alert("Please select a valid date"); return
+  }
+  const dob = new Date(year, month-1, date)
+  if (!isDateAtLeast18YearsBack(dob)) {
+    alert("Must be 18+ to participate. Sorry!"); return
+  }
+
   const city = pincodes[pincode];
   if (pincodes && Object.keys(pincodes).length && !city) {
     alert("Please enter a valid pincode"); return
   }
 
   const urlParams = new URLSearchParams(window.location.search);
-  const referredBy = urlParams.get('code') || '';
+  const referredBy = urlParams.get('referralcode') || '';
+  if (referredBy) {
+    await addBonus(referredBy)
+  }
 
   const referralCode = generateShortUniqueCode()
   const userType = "User"
