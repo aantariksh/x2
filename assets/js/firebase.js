@@ -17,7 +17,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
 const GAME_ID = "bikeRace"
-const START_DATE = new Date("2023-08-15");
+const START_DATE = new Date("2023-08-25");
 
 function computeCurrentWeek() {
   try {
@@ -214,7 +214,7 @@ async function computeWinners(count) {
 const exports = {
   computeCurrentWeek,
   addProfile, getProfile,
-  addScore, addBonus,
+  addScore,
   getScoreWithRank,
   getEntireLeaderBoard,
   getWeeklyWinnersWithDetails, computeWinners

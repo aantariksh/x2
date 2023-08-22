@@ -138,7 +138,7 @@ async function register() {
   const urlParams = new URLSearchParams(window.location.search);
   const referredBy = urlParams.get('referralcode') || '';
   if (referredBy) {
-    await addBonus(referredBy)
+    // await addBonus(referredBy)
   }
 
   const referralCode = generateShortUniqueCode()

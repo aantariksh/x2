@@ -102,7 +102,7 @@
         <th scope="row">{}</th>
         <td>{} <br><small>{}</small></td>
         <td>{}</td>
-        <td class="text-center">{} <br><small>{}</small></td>
+        <td class="text-center">{}</td>
         <td>{}</td>
       </tr>
     `
@@ -114,7 +114,7 @@
         try {
           const row = schema.format(i+1, 
             d.user.name, `XXXXXX${d.user.mobile.slice(-4)}`, d.user.city, 
-            d.scores.total, `<span>+</span>${d.scores.bonus}`, `${d.scores.time} <br><small>secs</small>`
+            d.scores.score, `${d.scores.time} <br><small>secs</small>`
           )
           leaderBoardTable.innerHTML += row
         } catch {}

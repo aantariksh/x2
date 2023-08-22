@@ -24,23 +24,23 @@
                   <h2 id="rank">0</h2>
                   <p>Your Rank</p>
                 </div>
-                <div class="col-12">
+                <!-- <div class="col-12">
                   <h2 id="total">0</h2>
                   <p>Total Score</p> 
-                </div>
-                <div class="col-6">
+                </div> -->
+                <div class="col-12">
                   <h2 id="score">0</h2>
                   <p>Highest Score</p>
                 </div>
-                <div class="col-6">
+                <!-- <div class="col-12">
                   <h2 id="bonus">0</h2>
                   <p>Referral Bonus</p>
-                </div>
-                <div class="col-6">
+                </div> -->
+                <div class="col-12">
                   <h2 id="time">0</h2>
                   <p>Total Game Time</p>  
                 </div>
-                <div class="col-6">
+                <div class="col-12">
                   <h2 id="count">0</h2>
                   <p>Game Count</p>  
                 </div>
@@ -68,8 +68,8 @@
       const data = await getScoreWithRank();
       rank.innerHTML = data.rank
       score.innerHTML = data.score.score
-      bonus.innerHTML = data.score.bonus
-      total.innerHTML = data.score.total
+      // bonus.innerHTML = data.score.bonus
+      // total.innerHTML = data.score.total
       time.innerHTML = data.score.time
       count.innerHTML = data.score.gameCount
     };
