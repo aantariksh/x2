@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CarePal Admin</title>
+    <link href="../assets/img/favicon.png" rel="icon">
+    <!-- Vendor CSS Files -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./vendor/bootstrap-icons/bootstrap-icons.css">
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div id="navbarPlaceholder"></div>
+    <!-- Navbar -->
+
+    <div class="container mt-4">
+
+      <div class="row text-center">
+        <div class="col-12 mb-3"><h3>Week 1</h3></div>
+        <div class="col-md-6 mb-2"><h4>Start Date: 29th August, 2023</h4></div>
+        <div class="col-md-6 mb-2"><h4>End Date: 29th October, 2023</h4></div>
+      </div>
+
+      <div class="table-responsive">
+        <div class="text-end mb-3">
+          <a class="btn btn-outline-success" onclick="downloadCSV('weekly_winners')">Download Excel</a>
+        </div>
+        <table class="table table-sm table-bordered table-hover table-striped text-center">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col" style="color: white !important;">#</th>
+              <th scope="col" style="color: white !important;">Name</th>
+              <th scope="col" style="color: white !important;">Mobile</th>
+              <th scope="col" style="color: white !important;">City</th>
+              <th scope="col" style="color: white !important;">Game Count</th>
+              <th scope="col" style="color: white !important;">Score</th>
+            </tr>
+          </thead>
+          <tbody id="data-table">
+            <tr>
+              <td colspan="7">
+                <div class="spinner-grow text-primary my-5" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </body>
+
+  <!-- Vendor JS Files -->
+  <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="./firebase/leaderboard.js" type="module"></script>
+</html>

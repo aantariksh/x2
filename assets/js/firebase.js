@@ -45,7 +45,7 @@ function computeCurrentWeek() {
  * 8. fetch leaderboard
  * */
 
-// USERS/mobile: { name, mobile, pincode, city, referredBy, referralCode, userType }
+// USERS/mobile: { name, mobile, pincode, city, referredBy, referralCode, userType, joinDate }
 async function addProfile(profile) {
   const dbRef = ref(db, `${GAME_ID}/users/${profile.mobile}`)
   await set(dbRef, profile);

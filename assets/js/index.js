@@ -144,8 +144,9 @@ async function register() {
   const referralCode = generateShortUniqueCode()
   const userType = "User"
 
+  const joinDate = new Date()
   const profile = {
-    name, mobile, pincode, city, referredBy, referralCode, userType
+    name, mobile, pincode, city, referredBy, referralCode, userType, joinDate
   }
 
   localStorage.setItem("profile", JSON.stringify(profile));

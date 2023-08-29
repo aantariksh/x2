@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CarePal Admin</title>
+    <link href="../assets/img/favicon.png" rel="icon">
+    <!-- Vendor CSS Files -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./vendor/bootstrap-icons/bootstrap-icons.css">
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div id="navbarPlaceholder"></div>
+    <!-- Navbar -->
+
+    <div class="container mt-4">
+      <div class="card text-center mb-4">
+        <div class="card-body">
+          <h1>Daily Users</h1>
+          <canvas id="dailyChart" style="max-height: 50vh;"></canvas>
+        </div>
+      </div>
+      <div class="card text-center">
+        <div class="card-body">
+          <h1>Weekly Users</h1>
+          <canvas id="weeklyChart" style="max-height: 50vh;"></canvas>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!-- Vendor JS Files -->
+  <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="./firebase/index.js" type="module"></script>
+  <script src="./firebase/analytics.js" type="module"></script>
+</html>
