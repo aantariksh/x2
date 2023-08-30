@@ -17,14 +17,15 @@
 
     <div class="container mt-5">
 
+      <h3 class="text-center mb-3">Current leaderboard</h3>
       <div class="row text-center">
-        <div class="col-md-6 mb-3"><h4>Start Date: 29th August, 2023</h4></div>
-        <div class="col-md-6 mb-3"><h4>End Date: 29th October, 2023</h4></div>
+        <div class="col-md-6 mb-1"><h4>Start Date: 1 Sept 2023</h4></div>
+        <div class="col-md-6 mb-1"><h4 id="current_date">Current Date: </h4></div>
       </div>
 
       <div class="table-responsive">
         <div class="text-end mb-3">
-          <a class="btn btn-outline-success" onclick="downloadCSV('leaderboard')">Download Excel</a>
+          <a class="btn btn-outline-success" id="downloadBtn">Download Excel</a>
         </div>
         <table class="table table-sm table-bordered table-hover table-striped text-center">
           <thead class="table-dark">

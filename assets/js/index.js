@@ -116,7 +116,8 @@ const registration = document.getElementById("registration")
 async function register() {
   const formData = new FormData(registration);
   const values = Object.fromEntries(formData.entries());
-  const { name, mobile, date, month, year, pincode } = values
+  const { name: raw_name, mobile, date, month, year, pincode } = values
+  const name = raw_name.replace(/[^a-zA-Z\s.]/g, "");
 
   if (!isValidMobileNumber(mobile)) {
     alert("Please enter a valid mobile number"); return
@@ -144,7 +145,9 @@ async function register() {
   const referralCode = generateShortUniqueCode()
   const userType = "User"
 
-  const joinDate = new Date()
+  const d = new Date()
+  const joinDate = d.toISOString().split("T")[0]
+
   const profile = {
     name, mobile, pincode, city, referredBy, referralCode, userType, joinDate
   }

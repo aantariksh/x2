@@ -17,7 +17,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 
 const GAME_ID = "bikeRace"
-const START_DATE = new Date("2023-08-25");
+const START_DATE = new Date("2023-09-01");
 
 function computeCurrentWeek() {
   try {
@@ -47,6 +47,7 @@ function computeCurrentWeek() {
 
 // USERS/mobile: { name, mobile, pincode, city, referredBy, referralCode, userType, joinDate }
 async function addProfile(profile) {
+  console.log(profile)
   const dbRef = ref(db, `${GAME_ID}/users/${profile.mobile}`)
   await set(dbRef, profile);
 }

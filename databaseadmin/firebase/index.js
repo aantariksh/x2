@@ -38,13 +38,13 @@ window.logOut = () => signOut(auth);
 
 onAuthStateChanged(auth, (user) => {
   const index = "/databaseadmin/index";
-  const users = "/databaseadmin/users";
+  const masterboard = "/databaseadmin/masterboard";
   const currentPage = location.pathname;
 
   if (user) {
     if (user.uid != "iGZqcy0IAzevZrVhAAbct8WZ4xK2" && user.uid != "VPpk8oj6L9ZKgoxlv1XohQn1v8u2") signOut(auth);
     if (currentPage.startsWith(index)) {
-      location.pathname = users + ".html";
+      location.pathname = masterboard + ".html";
     }
   } else {
     if (!currentPage.startsWith(index)) {
@@ -112,3 +112,170 @@ function downloadCSV(downloadName='data') {
   URL.revokeObjectURL(blobUrl);
 }
 window.downloadCSV = downloadCSV
+
+
+/**
+ * List.Js
+*/
+
+function togglePaginationButtonDisable(button, disabled) {
+  button.disabled = disabled;
+  button.classList[disabled ? 'add' : 'remove']('disabled');
+};
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+function camelize(str) {
+  var text = str.replace(/[-_\s.]+(.)?/g, function (_, c) {
+    return c ? c.toUpperCase() : '';
+  });
+  return "".concat(text.substr(0, 1).toLowerCase()).concat(text.substr(1));
+};
+
+function getData(el, data) {
+  try {
+    return JSON.parse(el.dataset[camelize(data)]);
+  } catch (e) {
+    return el.dataset[camelize(data)];
+  }
+};
+
+function listInit() {
+  if (window.List) {
+    var lists = document.querySelectorAll('[data-list]');
+
+    if (lists.length) {
+      lists.forEach(function (el) {
+        var options = getData(el, 'list');
+
+        if (options.pagination) {
+          options = _objectSpread(_objectSpread({}, options), {}, {
+            pagination: _objectSpread({
+              item: '<li><button class=\'page btn btn-sm btn-outline-primary me-1\' type=\'button\'></button></li>'
+            }, options.pagination)
+          });
+        }
+
+        var paginationButtonNext = el.querySelector('[data-list-pagination="next"]');
+        var paginationButtonPrev = el.querySelector('[data-list-pagination="prev"]');
+        var viewAll = el.querySelector('[data-list-view="*"]');
+        var viewLess = el.querySelector('[data-list-view="less"]');
+        var listInfo = el.querySelector('[data-list-info]');
+        var listFilter = document.querySelector('[data-list-filter]');
+        var list = new window.List(el, options); //-------fallback-----------
+
+        list.on('updated', function (item) {
+          var fallback = el.querySelector('.fallback') || document.getElementById(options.fallback);
+
+          if (fallback) {
+            if (item.matchingItems.length === 0) {
+              fallback.classList.remove('d-none');
+            } else {
+              fallback.classList.add('d-none');
+            }
+          }
+        }); // ---------------------------------------
+
+        var totalItem = list.items.length;
+        var itemsPerPage = list.page;
+        var btnDropdownClose = list.listContainer.querySelector('.btn-close');
+        var pageQuantity = Math.ceil(totalItem / itemsPerPage);
+        var numberOfcurrentItems = list.visibleItems.length;
+        var pageCount = 1;
+        btnDropdownClose && btnDropdownClose.addEventListener('search.close', function () {
+          list.fuzzySearch('');
+        });
+
+        var updateListControls = function updateListControls() {
+          listInfo && (listInfo.innerHTML = "".concat(list.i, " to ").concat(numberOfcurrentItems, " of ").concat(totalItem));
+          paginationButtonPrev && togglePaginationButtonDisable(paginationButtonPrev, pageCount === 1);
+          paginationButtonNext && togglePaginationButtonDisable(paginationButtonNext, pageCount === pageQuantity);
+
+          if (pageCount > 1 && pageCount < pageQuantity) {
+            togglePaginationButtonDisable(paginationButtonNext, false);
+            togglePaginationButtonDisable(paginationButtonPrev, false);
+          }
+        }; // List info
+
+
+        updateListControls();
+
+        if (paginationButtonNext) {
+          paginationButtonNext.addEventListener('click', function (e) {
+            e.preventDefault();
+            pageCount += 1;
+            var nextInitialIndex = list.i + itemsPerPage;
+            nextInitialIndex <= list.size() && list.show(nextInitialIndex, itemsPerPage);
+            numberOfcurrentItems += list.visibleItems.length;
+            updateListControls();
+          });
+        }
+
+        if (paginationButtonPrev) {
+          paginationButtonPrev.addEventListener('click', function (e) {
+            e.preventDefault();
+            pageCount -= 1;
+            numberOfcurrentItems -= list.visibleItems.length;
+            var prevItem = list.i - itemsPerPage;
+            prevItem > 0 && list.show(prevItem, itemsPerPage);
+            updateListControls();
+          });
+        }
+
+        var toggleViewBtn = function toggleViewBtn() {
+          viewLess.classList.toggle('d-none');
+          viewAll.classList.toggle('d-none');
+        };
+
+        if (viewAll) {
+          viewAll.addEventListener('click', function () {
+            list.show(1, totalItem);
+            pageQuantity = 1;
+            pageCount = 1;
+            numberOfcurrentItems = totalItem;
+            updateListControls();
+            toggleViewBtn();
+          });
+        }
+
+        if (viewLess) {
+          viewLess.addEventListener('click', function () {
+            list.show(1, itemsPerPage);
+            pageQuantity = Math.ceil(totalItem / itemsPerPage);
+            pageCount = 1;
+            numberOfcurrentItems = list.visibleItems.length;
+            updateListControls();
+            toggleViewBtn();
+          });
+        } // numbering pagination
+
+
+        if (options.pagination) {
+          el.querySelector('.pagination').addEventListener('click', function (e) {
+            if (e.target.classList[0] === 'page') {
+              pageCount = Number(e.target.innerText);
+              updateListControls();
+            }
+          });
+        }
+
+        if (options.filter) {
+          var key = options.filter.key;
+          listFilter.addEventListener('change', function (e) {
+            list.filter(function (item) {
+              if (e.target.value === '') {
+                return true;
+              }
+
+              return item.values()[key].toLowerCase().includes(e.target.value.toLowerCase());
+            });
+          });
+        }
+      });
+    }
+  }
+};
+window.listInit = listInit;

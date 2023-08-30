@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CarePal Admin</title>
+    <link href="../assets/img/favicon.png" rel="icon">
+    <!-- Vendor CSS Files -->
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./vendor/bootstrap-icons/bootstrap-icons.css">
+    <style>
+      li.active button { background-color: #0d6efd; color: white; }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div id="navbarPlaceholder"></div>
+    <!-- Navbar -->
+
+    <div class="container mt-3">
+      <div class="text-end mb-3">
+        <a class="btn btn-outline-success" id="downloadBtn">Download Excel</a>
+      </div>
+
+      <div class="card mb-3" id="tableContainer" data-list='{"valueNames":["id","name","mobile","pincode","city","user_type","join_date","game_count","score"],"page":100,"pagination":true}'>
+        <div class="card-header">
+          <h5 class="mb-3">All Users</h5>
+          <div class="row">
+            <div class="col-12">
+              <form onsubmit="(e) => {e.preventDefault(); return false}">
+                <div class="input-group">
+                  <input class="form-control form-control-sm shadow-none search" type="search" placeholder="Search for Programs" aria-label="search" />
+                  <button class="btn btn-sm btn-outline-secondary border-300 hover-border-secondary"><span class="bi bi-search fs--1"></span></button>
+                </div>
+              </form>
+            </div>                
+          </div>               
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive scrollbar">
+            <table class="table table-bordered table-hover table-striped text-center overflow-hidden">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col" style="color: white !important;" class="sort" data-sort="id">#</th>
+                  <th scope="col" style="color: white !important;" class="sort" data-sort="name">Name</th>
+                  <th scope="col" style="color: white !important;" class="sort" data-sort="mobile">Mobile</th>
+                  <th scope="col" style="color: white !important;" class="sort" data-sort="pincode">PinCode</th>
+                  <th scope="col" style="color: white !important;" class="sort" data-sort="city">City</th>
+                  <th scope="col" style="color: white !important;" class="sort" data-sort="user_type">User Type</th>
+                  <th scope="col" style="color: white !important;" class="sort" data-sort="join_date">Join Date</th>
+                  <th scope="col" style="color: white !important;" class="sort" data-sort="game_count">Game Count</th>
+                  <th scope="col" style="color: white !important;" class="sort" data-sort="score">Score</th>
+                  <th scope="col" style="color: white !important;">Action</th>
+                </tr>
+              </thead>
+              <tbody class="list" id="data-table">
+                <tr>
+                  <td colspan="10">
+                    <div class="spinner-grow text-primary my-5" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer d-flex align-items-center justify-content-center">
+          <button class="btn btn-sm btn-primary me-1" type="button" title="Previous" data-list-pagination="prev"><span class="bi bi-chevron-left"></span></button>
+          <ul class="pagination mb-0"></ul>
+          <button class="btn btn-sm btn-primary ms-1" type="button" title="Next" data-list-pagination="next"><span class="bi bi-chevron-right"></span></button>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <!-- Vendor JS Files -->
+  <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="./vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="./vendor/list.js/list.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="./firebase/index.js" type="module"></script>
+  <script src="./firebase/masterboard.js" type="module"></script>
+</html>
