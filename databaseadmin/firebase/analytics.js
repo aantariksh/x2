@@ -5,20 +5,23 @@ import {
 
 const db = getDatabase();
 
+const START_DATE = new Date("2023-09-01");
+
 async function main() {
   const dbRef = ref(db, `bikeRace/users/`)
   const snapshot = await get(dbRef);
   const users = snapshot.val();
   const usersData = Object.keys(users)
     .filter(mobile => users[mobile]?.joinDate)
-    .map(mobile => users[mobile]?.joinDate)
+    .map(mobile => new Date(users[mobile]?.joinDate))
+    .filter(date => date >= START_DATE)
+    .sort((a, b) => a-b);
 
-  const START_DATE = new Date("2023-08-27");
   function computeWeek(currentDate = new Date()) {
     try {
       const oneDay = 24 * 60 * 60 * 1000;
       const diffDays = Math.round(Math.abs((START_DATE - currentDate) / oneDay));
-      return Math.floor(diffDays / 7);
+      return Math.floor(diffDays / 7) + 1;
     } catch {
       return 1
     }
@@ -26,8 +29,9 @@ async function main() {
 
   // Aggregate data for daily counts
   const dailyCounts = {};
+
   usersData.forEach(date => {
-    const joinDate = new Date(date).toLocaleDateString();
+    const joinDate = date.toLocaleDateString();
     dailyCounts[joinDate] = (dailyCounts[joinDate] || 0) + 1;
   });
 

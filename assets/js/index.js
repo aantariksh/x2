@@ -63,7 +63,7 @@ window.addEventListener('load', async () => {
 function getLoggedInUser() {
   const profile = JSON.parse(localStorage.getItem("profile"))
   if (!profile) location.href = "auth.html"
-  return profile.mobile
+  return profile
 }
 
 // Logout user

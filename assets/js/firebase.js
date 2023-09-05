@@ -71,7 +71,15 @@ async function addScore(k, s, t) {
   const score = parseInt(s);
   const time = parseFloat(t).toFixed(2);
   
-  const mobile = getLoggedInUser()
+  const profile = getLoggedInUser() 
+  const mobile = profile?.mobile
+  if (!mobile) return
+
+  const profileSaved = await getProfile(mobile)
+  if (!profileSaved) {
+    await addProfile(profile)
+  }
+
   const dbRef = ref(db, `${GAME_ID}/scores/${mobile}`);
   const snapshot = await get(dbRef);
   const oldScore = snapshot.val()
@@ -155,7 +163,10 @@ async function getPlayerRank(score) {
 }
 
 async function getScoreWithRank() {
-  const mobile = getLoggedInUser()
+  const profile =  getLoggedInUser() 
+  const mobile = profile?.mobile
+  if (!mobile) return
+
   const score = await getScore(mobile)
   const rank = await getPlayerRank(score?.total || 0)
   return {score, rank}
