@@ -113,7 +113,7 @@
         headerImage.src = `./assets/img/LeaderBoard/w${week}.png`
       }
 
-      const data = await getWeeklyWinnersWithDetails(week);
+      const data = await getWeeklyWinners(week);
       leaderBoardTable.innerHTML = ''
       data.forEach((d, i) => {
         const row = schema.format(i+1, 

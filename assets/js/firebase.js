@@ -190,23 +190,11 @@ async function getEntireLeaderBoard(count=100) {
   return leaderBoard
 }
 
-// Weekly Winners/weekId: [mobile, mobile2, ..., mobile100]
-async function getWeeklyWinners(week) {
-  const dbRef = ref(db, `${GAME_ID}/winners/${week}`)
-  const snapshot = await get(dbRef);
+async function getWeeklyWinners(id) {
+  const snapshot = await get(ref(db, `${GAME_ID}/winners/week${id}`))
   return snapshot.val()
 }
 
-async function getWeeklyWinnersWithDetails(week) {
-  const winningMobileNumbers = await getWeeklyWinners(week)
-  const promises = winningMobileNumbers.map(async mobile => {
-    const user = await getProfile(mobile)
-    const scores = await getScore(mobile)
-    return {mobile, user, scores}
-  })
-  const data = await Promise.all(promises)
-  return data
-}
 
 async function computeWinners(count) {
   const week = computeCurrentWeek() - 1
@@ -229,6 +217,6 @@ const exports = {
   addScore,
   getScoreWithRank,
   getEntireLeaderBoard,
-  getWeeklyWinnersWithDetails, computeWinners
+  getWeeklyWinners, computeWinners
 }
 Object.keys(exports).forEach(key => window[key] = exports[key])
