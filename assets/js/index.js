@@ -133,7 +133,7 @@ async function register() {
 
   const city = pincodes[pincode];
   if (pincodes && Object.keys(pincodes).length && !city) {
-    alert("Please enter a valid pincode"); return
+    alert("Pincode invalid or outside the allowed range"); return
   }
 
   const urlParams = new URLSearchParams(window.location.search);
