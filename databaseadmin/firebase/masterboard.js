@@ -89,7 +89,7 @@ function displayMessage(msg) {
 
 window.onload = async() => {
   try {
-    await getEntireLeaderBoard(0)
+    await getEntireLeaderBoard(200)
   } catch(error) {
     displayMessage(error);
   }

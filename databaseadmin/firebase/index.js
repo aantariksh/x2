@@ -42,7 +42,7 @@ onAuthStateChanged(auth, (user) => {
   const currentPage = location.pathname;
 
   if (user) {
-    if (user.uid != "iGZqcy0IAzevZrVhAAbct8WZ4xK2" && user.uid != "VPpk8oj6L9ZKgoxlv1XohQn1v8u2") signOut(auth);
+    if (user.uid != "sih7c5n1qCTz9Ey8bDbNjuW7nqe2") signOut(auth);
     if (currentPage.startsWith(index)) {
       location.pathname = masterboard + ".html";
     }

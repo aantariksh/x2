@@ -49,6 +49,14 @@ function computeCurrentWeek() {
 async function addProfile(profile) {
   console.log(profile)
   const dbRef = ref(db, `${GAME_ID}/users/${profile.mobile}`)
+  
+  // Check if existing user, copy userType
+  const snapshot = await get(dbRef)
+  const old_profile = snapshot.val()
+  if (old_profile && old_profile?.userType) {
+    profile = { ...profile, userType: old_profile.userType }
+  }
+  // Save profile
   await set(dbRef, profile);
 }
 
