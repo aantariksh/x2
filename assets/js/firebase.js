@@ -4,13 +4,13 @@ import { getDatabase, get, set, ref, query, orderByChild, onValue, endAt, limitT
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyByC1b982YfVdqkYJGs10bwBK7bKEbOSYc",
-  authDomain: "race2vegas-2.firebaseapp.com",
-  databaseURL: "https://race2vegas-2-default-rtdb.firebaseio.com",
-  projectId: "race2vegas-2",
-  storageBucket: "race2vegas-2.appspot.com",
-  messagingSenderId: "1020653892747",
-  appId: "1:1020653892747:web:21f3e4feb3f77f105c508e"
+  apiKey: "AIzaSyAevTZWCcLac89nt2zXZPiCSn-Lhuj07TY",
+  authDomain: "race2vegas-3.firebaseapp.com",
+  databaseURL: "https://race2vegas-3-default-rtdb.firebaseio.com",
+  projectId: "race2vegas-3",
+  storageBucket: "race2vegas-3.appspot.com",
+  messagingSenderId: "449643200871",
+  appId: "1:449643200871:web:7b56cfd7bb9111478befc2"
 };
 
 const app = initializeApp(firebaseConfig);
