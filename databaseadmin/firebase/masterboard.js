@@ -89,7 +89,11 @@ function displayMessage(msg) {
 
 window.onload = async() => {
   try {
-    await getEntireLeaderBoard(200)
+    const urlParams = new URLSearchParams(window.location.search);
+    let count = parseInt(urlParams.get('count'))
+    if ( count == 0) {}
+    else if (!count) { count = 100 }
+    await getEntireLeaderBoard(count)
   } catch(error) {
     displayMessage(error);
   }

@@ -22,7 +22,7 @@ async function getProfile(mobile) {
 async function getEntireLeaderBoard(count=100) {
   let scoreBoardQuery = query(ref(db, `${GAME_ID}/scores/`), orderByChild('negative_total'));
   if (count && count > 0) {
-    scoreBoardQuery = query(ref(db, `${GAME_ID}/scores/`), orderByChild('negative_total'), limitToFirst(count)); 
+    scoreBoardQuery = query(ref(db, `${GAME_ID}/scores/`), orderByChild('negative_total'), limitToFirst(count * 2)); 
   }
 
   const snapshot = await get(scoreBoardQuery);
@@ -37,7 +37,8 @@ async function getEntireLeaderBoard(count=100) {
     return {...d, user}
   })
   const leaderBoard = await Promise.all(promises)
-  return leaderBoard
+  return leaderBoard.filter(d => ['User', 'Winner'].includes(d?.user?.userType)).slice(0, count)
+  // return leaderBoard
 }
 
 window.onload = async() => {

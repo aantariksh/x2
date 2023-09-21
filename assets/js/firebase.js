@@ -4,13 +4,13 @@ import { getDatabase, get, set, ref, query, orderByChild, onValue, endAt, limitT
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAevTZWCcLac89nt2zXZPiCSn-Lhuj07TY",
-  authDomain: "race2vegas-3.firebaseapp.com",
-  databaseURL: "https://race2vegas-3-default-rtdb.firebaseio.com",
-  projectId: "race2vegas-3",
-  storageBucket: "race2vegas-3.appspot.com",
-  messagingSenderId: "449643200871",
-  appId: "1:449643200871:web:7b56cfd7bb9111478befc2"
+  apiKey: "AIzaSyAKSYkvLSpqrZDbHn-azk_DRKSbx1FaO1M",
+  authDomain: "race2vegas-4.firebaseapp.com",
+  databaseURL: "https://race2vegas-4-default-rtdb.firebaseio.com",
+  projectId: "race2vegas-4",
+  storageBucket: "race2vegas-4.appspot.com",
+  messagingSenderId: "903946672933",
+  appId: "1:903946672933:web:16a68a68e2174bd57dd8cc"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -182,7 +182,7 @@ async function getScoreWithRank() {
 
 // LeaderBoard
 async function getEntireLeaderBoard(count=100) {
-  const scoreBoardQuery = query(ref(db, `${GAME_ID}/scores/`), orderByChild('negative_total'), limitToFirst(count));
+  const scoreBoardQuery = query(ref(db, `${GAME_ID}/scores/`), orderByChild('negative_total'), limitToFirst(count*2));
   const snapshot = await get(scoreBoardQuery);
   const data = []
 
@@ -195,7 +195,7 @@ async function getEntireLeaderBoard(count=100) {
     return {...d, user}
   })
   const leaderBoard = await Promise.all(promises)
-  return leaderBoard
+  return leaderBoard.filter(d => ['User', 'Winner'].includes(d?.user?.userType)).slice(0, count)
 }
 
 async function getWeeklyWinners(id) {

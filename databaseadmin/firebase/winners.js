@@ -35,6 +35,27 @@ function computeWeek() {
   }
 }
 
+// async function addUserToWinners() {
+//   const week = 2
+//   const winnersDbRef = ref(db, `${GAME_ID}/winners/week${week}`)
+//   const wsnp = await get(winnersDbRef)
+//   const data = wsnp.val()
+
+
+//   for (let i = 0; i < mobiles.length; i++) {
+//     let mobile = mobiles[i]
+//     let snapshot = await get(ref(db, `${GAME_ID}/scores/${mobile}`))
+//     const scores = snapshot.val()
+//     snapshot =  await get(ref(db, `${GAME_ID}/users/${mobile}`))
+//     const user = snapshot.val()
+  
+//     data.push({mobile, scores, user})
+//   }
+
+//   await set(winnersDbRef, data)
+// }
+// window.addUserToWinners = addUserToWinners
+
 async function computeWinningList() {
   try {
     alert("Computing results, please dont refresh...")
@@ -55,11 +76,20 @@ async function computeWinningList() {
     ); 
   
     const snapshot = await get(scoreBoardQuery);
-    const data = []
+    let data = []
   
     snapshot.forEach(child => {
       data.push({mobile: child.key, scores: child.val()})
     })
+
+    let oldWinners = []
+    for (let i = 1; i < week; i++) {
+      let snp = await get(ref(db, `${GAME_ID}/winners/week${i}`))
+      let users = snp.val()
+      oldWinners += users.map(us => us.mobile)
+    }
+
+    data = data.filter(d => !oldWinners.includes(d.mobile))
 
     const promises = data.map(async (d) => {
       const user = await getProfile(d["mobile"])
