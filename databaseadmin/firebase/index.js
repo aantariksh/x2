@@ -9,13 +9,13 @@ import {
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAKSYkvLSpqrZDbHn-azk_DRKSbx1FaO1M",
-  authDomain: "race2vegas-4.firebaseapp.com",
-  databaseURL: "https://race2vegas-4-default-rtdb.firebaseio.com",
-  projectId: "race2vegas-4",
-  storageBucket: "race2vegas-4.appspot.com",
-  messagingSenderId: "903946672933",
-  appId: "1:903946672933:web:16a68a68e2174bd57dd8cc"
+  apiKey: "AIzaSyByC1b982YfVdqkYJGs10bwBK7bKEbOSYc",
+  authDomain: "race2vegas-2.firebaseapp.com",
+  databaseURL: "https://race2vegas-2-default-rtdb.firebaseio.com",
+  projectId: "race2vegas-2",
+  storageBucket: "race2vegas-2.appspot.com",
+  messagingSenderId: "1020653892747",
+  appId: "1:1020653892747:web:bf70bf62f9142b0d5c508e"
 };
 
 const app = initializeApp(firebaseConfig);
