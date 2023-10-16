@@ -206,7 +206,7 @@ async function getWeeklyWinners(id) {
 
 async function computeWinners(count) {
   const week = computeCurrentWeek() - 1
-  if (![1,2,3,4,5,6].includes(week)) return
+  if (![1,2,3,4,5,6,7,8].includes(week)) return
 
   const scoreBoardQuery = query(ref(db, `${GAME_ID}/scores/`), orderByChild('negative_total'), limitToFirst(count * week));
   const snapshot = await get(scoreBoardQuery);

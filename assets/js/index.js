@@ -153,6 +153,8 @@ async function register() {
   }
 
   localStorage.setItem("profile", JSON.stringify(profile));
-  await addProfile(profile)
+  try {
+    await addProfile(profile)
+  } catch {}
   location.href = "index.html"
 }

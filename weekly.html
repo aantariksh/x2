@@ -21,7 +21,7 @@
 
     <div class="background-container align-items-end" id="backgroundContainer">
       <div class="container content-container" id="contentContainer">
-        <div class="row align-items-start mx-3 mx-md-5" id="weeks">
+        <div class="row align-items-start mx-2" id="weeks">
           <!-- <div class="col-4 mb-2" id="week1">
             <a href="./game/winners.html?week=1"><img src="./assets/img/Weekly/w1.png" style="width: 100%;"></a>
           </div> -->
@@ -50,10 +50,10 @@
     document.addEventListener("DOMContentLoaded", () => {
       const currentWeek = computeCurrentWeek()
       const weeks = document.getElementById("weeks")
-      for (i = 1; i <= 6; i++) {
+      for (i = 1; i <= 8; i++) {
         const href = currentWeek > i ? `href="winners.html?week=${i}"` : ""
         const imgsrc = currentWeek > i ? `./assets/img/Weekly/w${i}.png` : `./assets/img/Weekly/w${i}b.png`
-        const col = `<div class="col-4 mb-2">
+        const col = `<div class="col-3 mb-2">
           <a ${href}>
             <img src="${imgsrc}" style="width: 90%;">
           </a>

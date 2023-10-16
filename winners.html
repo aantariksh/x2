@@ -105,7 +105,7 @@
       const urlParams = new URLSearchParams(window.location.search);
       const currentWeek = computeCurrentWeek();
       const week = parseInt(urlParams.get('week') || currentWeek);
-      if (![1,2,3,4,5,6].includes(week) || week >= currentWeek)
+      if (![1,2,3,4,5,6,7,8].includes(week) || week >= currentWeek)
         location.href = "leaderboard.html"
 
       const headerImage = document.getElementById("headerImage")
